@@ -1,0 +1,17 @@
+# Signing keys & packaged outputs (NEVER commit!)
+*.keystore
+*.jks
+*.p12
+*.apk
+*.idsig
+
+# Generated build artifacts & duplicated web assets
+build/
+android/assets/www/
+assets_src/data_bundle.js
+
+# Python & OS clutter
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db

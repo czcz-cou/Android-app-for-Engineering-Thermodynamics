@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>工热刷题宝 · 工程热力学题库</title>
+  <link rel="stylesheet" href="katex/katex.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- TAB 1: HOME / TODAY STYLE SYLLABUS -->
+    <main class="screen active" id="tab-home">
+      <div class="page-large-header">
+        <div>
+          <div class="page-kicker">工程热力学 · 367 题全解析</div>
+          <h1 class="page-title">工热题库</h1>
+        </div>
+        <button class="header-ring-btn" id="home-top-ring-btn" onclick="switchMainTab('settings')" title="前往设置与统计"></button>
+      </div>
+
+      <div id="hero-dashboard"></div>
+      <div id="quick-deck-strip" class="quick-strip"></div>
+      <div id="syllabus-container"></div>
+    </main>
+
+    <!-- TAB 2: REVIEW NOTEBOOK -->
+    <main class="screen" id="tab-notebook">
+      <div class="page-large-header">
+        <div>
+          <div class="page-kicker">错题 · 模糊 · 收藏 · 图文笔记</div>
+          <h1 class="page-title">复习本</h1>
+        </div>
+      </div>
+
+      <div class="seg-wrap">
+        <div class="seg-control seg-grid-4">
+          <button class="seg-btn active" data-nb="wrong" onclick="switchNotebookTab('wrong')">错题</button>
+          <button class="seg-btn" data-nb="fuzzy" onclick="switchNotebookTab('fuzzy')">模糊</button>
+          <button class="seg-btn" data-nb="fav" onclick="switchNotebookTab('fav')">收藏</button>
+          <button class="seg-btn" data-nb="notes" onclick="switchNotebookTab('notes')">笔记</button>
+        </div>
+      </div>
+      <div class="chip-scroll" id="nb-type-chips"></div>
+      <div id="nb-action-bar" style="margin: 12px 0;"></div>
+      <div id="nb-list-container"></div>
+    </main>
+
+    <!-- TAB 3: FORMULA REFERENCE -->
+    <main class="screen" id="tab-formulas">
+      <div class="page-large-header">
+        <div>
+          <div class="page-kicker">热力学定律 · 循环效率 · 微分关系</div>
+          <h1 class="page-title">核心公式</h1>
+        </div>
+      </div>
+
+      <div class="search-bar-wrap">
+        <div class="search-box">
+          <span class="search-box-ico" data-icon="search" data-cls="ic-sm"></span>
+          <input type="search" class="search-input" id="formula-search" placeholder="搜索公式、定律、系数（如：朗肯、麦克斯韦、露点）..." oninput="renderFormulas()" />
+        </div>
+      </div>
+      <div id="formulas-container"></div>
+    </main>
+
+    <!-- TAB 4: GLOBAL SEARCH -->
+    <main class="screen" id="tab-search">
+      <div class="page-large-header">
+        <div>
+          <div class="page-kicker">全文检索 · 题型进度</div>
+          <h1 class="page-title">搜题</h1>
+        </div>
+      </div>
+
+      <div class="search-bar-wrap">
+        <div class="search-box">
+          <span class="search-box-ico" data-icon="search" data-cls="ic-sm"></span>
+          <input type="search" class="search-input" id="global-search-input" placeholder="搜索题干、选项、公式符号或题号..." oninput="handleGlobalSearch()" />
+        </div>
+        <div class="chip-scroll" id="search-type-chips"></div>
+      </div>
+      <div id="search-results-container"></div>
+      <div id="search-overview-container" style="margin-top: 18px;"></div>
+    </main>
+
+    <!-- TAB 5: UNIFIED SETTINGS TAB -->
+    <main class="screen screen-grouped" id="tab-settings">
+      <div class="page-large-header">
+        <div>
+          <div class="page-kicker">主题 · 顺序调度 · 排版与数据</div>
+          <h1 class="page-title">设置</h1>
+        </div>
+      </div>
+      <div id="settings-page-body"></div>
+    </main>
+
+    <!-- iOS App Store Liquid Glass Floating Capsule Dock -->
+    <nav class="floating-dock" id="floating-dock" aria-label="主导航">
+      <button class="nav-item active" data-tab="home" onclick="switchMainTab('home')">
+        <span class="nav-ico" data-icon="layers"></span>
+        <span class="nav-label">题库</span>
+      </button>
+      <button class="nav-item" data-tab="notebook" onclick="switchMainTab('notebook')">
+        <span class="nav-ico" data-icon="bookmark-check"></span>
+        <span class="nav-label">复习本</span>
+        <span class="nav-badge num-tab" id="wrong-nav-badge" style="display:none;">0</span>
+      </button>
+      <button class="nav-item" data-tab="formulas" onclick="switchMainTab('formulas')">
+        <span class="nav-ico" data-icon="sigma"></span>
+        <span class="nav-label">公式</span>
+      </button>
+      <button class="nav-item" data-tab="search" onclick="switchMainTab('search')">
+        <span class="nav-ico" data-icon="search"></span>
+        <span class="nav-label">搜题</span>
+      </button>
+      <button class="nav-item" data-tab="settings" onclick="switchMainTab('settings')">
+        <span class="nav-ico" data-icon="settings"></span>
+        <span class="nav-label">设置</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- 120FPS LOCKED-MATRIX GPU SHARED-ELEMENT CARD MORPH -->
+  <div id="quiz-backdrop" onclick="closeQuizView()"></div>
+  <section id="quiz-view" aria-hidden="true">
+    <div class="quiz-hero-bar" id="quiz-hero-bar">
+      <div class="quiz-hero-meta">
+        <div class="quiz-hero-eyebrow" id="quiz-hero-eyebrow">章节练习</div>
+        <div class="quiz-hero-title" id="quiz-header-title">工程热力学</div>
+      </div>
+      <div class="quiz-hero-actions">
+        <button class="glass-icon-btn" id="quiz-mode-toggle" onclick="toggleQuizLocalMode()" title="切换刷题/背题"></button>
+        <button class="glass-icon-btn" id="quiz-fav-btn" onclick="toggleCurrentFav()" title="收藏本题"></button>
+        <button class="glass-icon-btn close-btn" onclick="closeQuizView()" title="关闭" data-icon="x"></button>
+      </div>
+    </div>
+
+    <div class="quiz-progress-track">
+      <div class="quiz-progress-fill" id="quiz-top-progress" style="width:0%"></div>
+    </div>
+
+    <!-- Horizontal Snap Card Carousel -->
+    <div class="q-carousel" id="quiz-carousel"></div>
+
+    <!-- Clean Bottom Quiz Control Bar -->
+    <div class="quiz-footer" id="quiz-footer">
+      <button class="foot-btn" id="btn-prev-q" onclick="stepQuestion(-1)"></button>
+      <button class="foot-btn sheet-trigger num-tab" id="btn-sheet-q" onclick="openQuestionSheet()"></button>
+      <button class="foot-btn primary" id="btn-next-q" onclick="stepQuestion(1)"></button>
+    </div>
+  </section>
+
+  <!-- Hidden file input for PC/Web fallback note image upload -->
+  <input type="file" id="browser-note-img-input" accept="image/*" multiple style="display:none;" onchange="handleBrowserNoteFiles(this)" />
+
+  <!-- QUESTION GRID SHEET MODAL -->
+  <div class="modal-backdrop" id="sheet-modal" onclick="if(event.target===this)closeQuestionSheet()">
+    <div class="sheet-panel">
+      <div class="sheet-grabber"></div>
+      <div class="sheet-head-row">
+        <div>
+          <div class="sheet-title">答题卡</div>
+          <div class="sheet-sub" id="sheet-order-hint"></div>
+        </div>
+        <button class="circle-btn" onclick="closeQuestionSheet()" data-icon="x"></button>
+      </div>
+      <div class="sheet-filter-row">
+        <button class="filter-chip" id="sheet-btn-unmastered" onclick="filterSessionUnmastered()"></button>
+        <button class="filter-chip" id="sheet-btn-all" onclick="restoreSessionAll()"></button>
+        <button class="filter-chip" id="sheet-btn-goto-settings" onclick="jumpFromQuizToSettings()"></button>
+      </div>
+      <div class="sheet-legend">
+        <span><i class="legend-dot" style="background:var(--success-fill)"></i>已掌握</span>
+        <span><i class="legend-dot" style="background:var(--warn)"></i>模糊</span>
+        <span><i class="legend-dot" style="background:var(--danger-fill)"></i>错题</span>
+        <span><i class="legend-dot" style="background:var(--border-strong)"></i>未做</span>
+      </div>
+      <div class="q-grid num-tab" id="sheet-grid"></div>
+    </div>
+  </div>
+
+  <!-- PANZOOM FULLSCREEN LIGHTBOX -->
+  <div id="lightbox" onclick="if(event.target.id==='lightbox'||event.target.classList.contains('lightbox-stage'))closeLightbox()">
+    <div class="lightbox-top">
+      <span style="font-size:12.5px; opacity:0.84;">双指捏合缩放 · 单指拖拽 · 双击复位</span>
+      <button class="circle-btn" style="background:rgba(255,255,255,0.14);color:#fff;" onclick="closeLightbox()" data-icon="x"></button>
+    </div>
+    <div class="lightbox-stage">
+      <img id="lightbox-img" src="" alt="图表预览" ondblclick="resetLightboxZoom()" />
+    </div>
+    <div class="lightbox-dock" id="lightbox-dock"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="katex/katex.min.js"></script>
+  <script src="vendor/icons.js"></script>
+  <script src="vendor/panzoom.min.js"></script>
+  <script src="data_bundle.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

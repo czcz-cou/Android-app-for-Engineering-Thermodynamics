@@ -1,0 +1,235 @@
+[
+  {
+    "id": "ch01",
+    "title": "基本概念与热力学第一定律",
+    "tag": "基础核心",
+    "items": [
+      {
+        "name": "绝对压力、表压力与真空度",
+        "formula": "$$p = p_{\\text{b}} + p_{\\text{e}}, \\quad p = p_{\\text{b}} - p_{\\text{v}}$$",
+        "note": "唯有绝对压力 $p$ 是状态参数；表压力 $p_{\\text{e}}$ 与真空度 $p_{\\text{v}}$ 均随当地大气压 $p_{\\text{b}}$ 变化。摄氏与热力学温标：$T = t + 273.15\\text{ K}$。"
+      },
+      {
+        "name": "理想气体状态方程与迈耶公式",
+        "formula": "$$pv = R_g T, \\quad pV = mR_g T = nRT, \\quad R_g = \\frac{R}{M}$$",
+        "note": "通用气体常数 $R = 8.3145\\text{ J/(mol}\\cdot\\text{K)}$；迈耶公式：$c_p - c_v = R_g$，$c_v = \\frac{R_g}{\\kappa - 1}$，$c_p = \\frac{\\kappa R_g}{\\kappa - 1}$（双原子气体常温取 $\\kappa = 1.4$，空气 $R_g = 287\\text{ J/(kg}\\cdot\\text{K)}$，$c_p = 1.005\\text{ kJ/(kg}\\cdot\\text{K)}$）。"
+      },
+      {
+        "name": "闭口系统热力学第一定律",
+        "formula": "$$Q = \\Delta U + W, \\quad q = \\Delta u + w, \\quad \\delta q = \\mathrm{d}u + \\delta w$$",
+        "note": "适用于任意工质、闭口系、任意过程（可逆或不可逆）。仅当可逆过程时才有膨胀功 $\\delta w = p\\,\\mathrm{d}v$，即 $\\delta q = \\mathrm{d}u + p\\,\\mathrm{d}v$。"
+      },
+      {
+        "name": "开口系统稳定流动能量方程",
+        "formula": "$$q = (h_2 - h_1) + \\frac{1}{2}(c_{\\text{f2}}^2 - c_{\\text{f1}}^2) + g(z_2 - z_1) + w_{\\text{s}} = \\Delta h + w_{\\text{t}}$$",
+        "note": "适用于任意工质、稳态稳流过程。技术功 $w_{\\text{t}} = w_{\\text{s}} + \\Delta c_{\\text{f}}^2/2 + g\\Delta z$，可逆时 $w_{\\text{t}} = -\\int_1^2 v\\,\\mathrm{d}p$。"
+      },
+      {
+        "name": "非稳态充气与放气能量方程",
+        "formula": "$$\\delta Q = \\mathrm{d}U_{\\text{CV}} + h_{\\text{out}}\\,\\delta m_{\\text{out}} - h_{\\text{in}}\\,\\delta m_{\\text{in}} + \\delta W$$",
+        "note": "刚性绝热气瓶快速充气（初态真空）：$u_2 = h_{\\text{in}} \\Rightarrow T_2 = \\kappa T_{\\text{in}}$；有余气绝热充气：$m_2 u_2 - m_1 u_1 = (m_2 - m_1)h_{\\text{in}}$。"
+      }
+    ]
+  },
+  {
+    "id": "ch02",
+    "title": "理想气体过程与混合气体",
+    "tag": "高频计算",
+    "items": [
+      {
+        "name": "可逆多变过程基本关系",
+        "formula": "$$pv^n = \\text{const}, \\quad \\frac{T_2}{T_1} = \\left(\\frac{v_1}{v_2}\\right)^{n-1} = \\left(\\frac{p_2}{p_1}\\right)^{\\frac{n-1}{n}}$$",
+        "note": "特征指数：$n=0$ 定压，$n=1$ 定温，$n=\\kappa$ 定熵（可逆绝热），$n=\\pm\\infty$ 定容。在 $p\\text{-}v$ 图与 $T\\text{-}s$ 图上，顺时针方向多变指数 $n$ 依次增大。"
+      },
+      {
+        "name": "多变过程功量、热量与多变比热容",
+        "formula": "$$w = \\frac{p_1 v_1 - p_2 v_2}{n - 1} = \\frac{R_g(T_1 - T_2)}{n - 1}, \\quad w_{\\text{t}} = nw, \\quad c_n = c_v \\frac{n - \\kappa}{n - 1}$$",
+        "note": "定温过程（$n=1$）：$w = w_{\\text{t}} = q = R_g T \\ln\\frac{v_2}{v_1} = R_g T \\ln\\frac{p_1}{p_2}$。当 $1 < n < \\kappa$ 时 $c_n < 0$（膨胀吸热降温，压缩放热升温）。"
+      },
+      {
+        "name": "理想气体熵变三公式（状态参数，与路径可逆性无关）",
+        "formula": "$$\\Delta s = c_v \\ln\\frac{T_2}{T_1} + R_g \\ln\\frac{v_2}{v_1} = c_p \\ln\\frac{T_2}{T_1} - R_g \\ln\\frac{p_2}{p_1} = c_v \\ln\\frac{p_2}{p_1} + c_p \\ln\\frac{v_2}{v_1}$$",
+        "note": "定比热容理想气体适用。无论过程可逆还是不可逆，只要初终态为平衡态均可直接代入计算（混合气体须代入组分分压力 $p_i$）。"
+      },
+      {
+        "name": "理想气体混合物定律与混合熵增",
+        "formula": "$$x_i = \\frac{n_i}{n} = \\frac{p_i}{p} = \\frac{V_i}{V}, \\quad M_{\\text{eq}} = \\sum x_i M_i, \\quad R_{g,\\text{eq}} = \\sum w_i R_{g,i} = \\frac{R}{M_{\\text{eq}}}$$",
+        "note": "道尔顿分压 $p_i V = n_i RT$，阿马格分体积 $p V_i = n_i RT$，故 $p_i V = p V_i$（注意 $p_i V_i = x_i n_i RT \\neq n_i RT$）。等温等压绝热混合熵增：$\\Delta S = -R \\sum n_i \\ln x_i > 0$。"
+      }
+    ]
+  },
+  {
+    "id": "ch03",
+    "title": "热力学第二定律、熵与㶲分析",
+    "tag": "必考辨析",
+    "items": [
+      {
+        "name": "卡诺定理与多热源内可逆循环热效率",
+        "formula": "$$\\eta_{\\text{t}} \\le \\eta_{\\text{c}} = 1 - \\frac{T_2}{T_1}, \\quad \\eta_{\\text{t,内可逆}} = 1 - \\frac{T_{\\text{mL}}}{T_{\\text{mH}}}$$",
+        "note": "恒温热源间一切可逆热机效率相等且与工质性质无关；变温吸放热时平均温度 $\\overline{T} = \\frac{q}{\\Delta s}$（绝热放热稳流换热器可用 $\\overline{T} = \\frac{h_1 - h_2}{s_1 - s_2}$）。"
+      },
+      {
+        "name": "克劳修斯不等式与熵平衡方程",
+        "formula": "$$\\oint \\frac{\\delta q}{T_{\\text{r}}} \\le 0, \\quad \\mathrm{d}S = \\delta S_{\\text{f}} + \\delta S_{\\text{m}} + \\delta S_{\\text{g}} \\; (\\delta S_{\\text{g}} \\ge 0)$$",
+        "note": "工质吸热 $q > 0$、放热 $q < 0$；循环一周工质一切状态参数复原（$\\oint \\mathrm{d}S = 0, \\oint \\mathrm{d}U = 0$）。稳态稳流控制体自身 $\\mathrm{d}S_{\\text{CV}}/\\mathrm{d}\\tau = 0$，进出口流体 $\\Delta s = s_{\\text{f}} + s_{\\text{g}}$。"
+      },
+      {
+        "name": "孤立系熵增与古依-斯托多拉㶲损公式",
+        "formula": "$$\\Delta S_{\\text{iso}} = S_{\\text{g}} \\ge 0, \\quad I = T_0 \\Delta S_{\\text{iso}} = T_0 S_{\\text{g}}$$",
+        "note": "注意必须乘以环境温度 $T_0$（而非任意低温热源温度 $T_2$）！非孤立系统向外放热时熵变 $\\Delta S$ 可正、可负、可为零。"
+      },
+      {
+        "name": "热量㶲、冷量㶲与稳流物流焓㶲",
+        "formula": "$$E_{x,Q} = \\left(1 - \\frac{T_0}{T}\\right)Q, \\quad e_{x,\\text{cold}} = \\left(\\frac{T_0}{T_{\\text{c}}} - 1\\right)q_{\\text{c}}, \\quad e_{x,h} = (h - h_0) - T_0(s - s_0)$$",
+        "note": "任何能量 = 可用能（㶲 $E_x$）+ 无用能（$A_n$）。绝热节流前后焓相等（$h_2 = h_1$），但焓㶲减少量 $i = e_{x,h1} - e_{x,h2} = T_0(s_2 - s_1) > 0$。"
+      }
+    ]
+  },
+  {
+    "id": "ch04",
+    "title": "水蒸气与湿空气（h-d 图）",
+    "tag": "工程应用",
+    "items": [
+      {
+        "name": "两相区湿蒸汽干度与状态参数",
+        "formula": "$$x = \\frac{m_{\\text{v}}}{m}, \\quad y = y' + x(y'' - y') \\quad (y \\in \\{v, u, h, s\\})$$",
+        "note": "定压加热三阶段：预热、汽化（$t = t_{\\text{s}}(p)$ 定温定压，汽化潜热 $\\gamma = h'' - h'$）、过热（$t > t_{\\text{s}}$）。两相区内饱和液体与干饱和蒸汽自由焓相等：$g' = g''$。"
+      },
+      {
+        "name": "湿空气相对湿度与含湿量",
+        "formula": "$$\\varphi = \\frac{p_{\\text{v}}}{p_{\\text{s}}(t)}, \\quad d = 0.622 \\frac{p_{\\text{v}}}{p - p_{\\text{v}}} = 0.622 \\frac{\\varphi p_{\\text{s}}}{p - \\varphi p_{\\text{s}}} \\; [\\text{kg/kg(DA)}]$$",
+        "note": "反解水蒸气分压力：$p_{\\text{v}} = \\frac{pd}{0.622 + d}$。未饱和湿空气：$t > t_{\\text{w}} > t_{\\text{d}}$（$\\varphi < 100\\%$）；饱和湿空气：$t = t_{\\text{w}} = t_{\\text{d}}$（$\\varphi = 100\\%$）。"
+      },
+      {
+        "name": "湿空气比焓与典型过程规律",
+        "formula": "$$h = 1.005t + d(2501 + 1.86t) \\; [\\text{kJ/kg(DA)}]$$",
+        "note": "① 等压加热：$d, p_{\\text{v}}, t_{\\text{d}}$ 不变，$t \\uparrow, \\varphi \\downarrow$；② 等压冷却析水（$t_2 < t_{\\text{d1}}$）：终态 $\\varphi_2 = 100\\%$，凝结水量 $\\Delta d = d_1 - d_2$；③ 绝热喷水加湿：近似等焓，$d \\uparrow, t \\downarrow$；④ 绝热节流降压：$t, d$ 不变，$p_{\\text{v}} \\downarrow \\Rightarrow \\varphi \\downarrow, t_{\\text{d}} \\downarrow$。"
+      }
+    ]
+  },
+  {
+    "id": "ch05",
+    "title": "喷管流动与活塞式压气机",
+    "tag": "流动与压缩",
+    "items": [
+      {
+        "name": "变截面管流基本方程与喷管选型",
+        "formula": "$$c_{\\text{f}}\\,\\mathrm{d}c_{\\text{f}} = -v\\,\\mathrm{d}p, \\quad \\frac{\\mathrm{d}A}{A} = (Ma^2 - 1)\\frac{\\mathrm{d}c_{\\text{f}}}{c_{\\text{f}}}, \\quad c = \\sqrt{\\kappa R_g T}$$",
+        "note": "出口流速 $c_{\\text{f2}} = \\sqrt{2(h_1^* - h_2)}$（实际流速 $c_{\\text{f2}}' = \\varphi c_{\\text{f2}s}$）。亚声速增速选渐缩（$p_{\\text{b}} \\ge p_{\\text{cr}}$）或缩放喷管（$p_{\\text{b}} < p_{\\text{cr}}$）。"
+      },
+      {
+        "name": "滞止参数、临界压力比与壅塞流量",
+        "formula": "$$\\nu_{\\text{cr}} = \\frac{p_{\\text{cr}}}{p^*} = \\left(\\frac{2}{\\kappa + 1}\\right)^{\\frac{\\kappa}{\\kappa - 1}}, \\quad \\frac{T_{\\text{cr}}}{T^*} = \\frac{2}{\\kappa + 1}$$",
+        "note": "双原子气体（空气）$\\nu_{\\text{cr}} = 0.528$，过热蒸汽 $\\nu_{\\text{cr}} = 0.546$，干饱和蒸汽 $\\nu_{\\text{cr}} = 0.577$。当 $p_{\\text{b}} \\le p_{\\text{cr}}$ 时，渐缩喷管出口（或缩放喷管喉部）锁定为临界状态（$p_2 = p_{\\text{cr}}, Ma = 1$），背压再降流量不变。"
+      },
+      {
+        "name": "活塞式压气机耗功、容积效率与多级压缩",
+        "formula": "$$w_{\\text{C}} = \\frac{n}{n-1}R_g T_1 \\left(\\pi^{\\frac{n-1}{n}} - 1\\right), \\quad \\eta_V = 1 - \\sigma\\left(\\pi^{\\frac{1}{n}} - 1\\right)$$",
+        "note": "余隙容积比 $\\sigma = V_{\\text{c}}/V_{\\text{h}}$ 不影响 1 kg 气体理论耗功，但降低产气量并增大实际耗功。$m$ 级压缩级间冷却至初温时最佳各级压比相等：$\\pi_1 = \\pi_2 = \\dots = \\sqrt[m]{\\pi}$。"
+      }
+    ]
+  },
+  {
+    "id": "ch06",
+    "title": "气体动力循环（内燃机与燃机）",
+    "tag": "动力循环",
+    "items": [
+      {
+        "name": "活塞式内燃机三种理想循环热效率",
+        "formula": "$$\\eta_{\\text{t,定容}} = 1 - \\frac{1}{\\varepsilon^{\\kappa - 1}}, \\quad \\eta_{\\text{t,定压}} = 1 - \\frac{1}{\\varepsilon^{\\kappa - 1}}\\frac{\\rho^\\kappa - 1}{\\kappa(\\rho - 1)}, \\quad \\eta_{\\text{t,混合}} = 1 - \\frac{1}{\\varepsilon^{\\kappa - 1}}\\frac{\\lambda\\rho^\\kappa - 1}{\\lambda - 1 + \\kappa\\lambda(\\rho - 1)}$$",
+        "note": "压缩比 $\\varepsilon = v_1/v_2$，定容增压比 $\\lambda = p_3/p_2$，定压预胀比 $\\rho = v_4/v_3$。相同 $\\varepsilon$ 与吸热量 $q_1$ 时：$\\eta_{\\text{定容}} > \\eta_{\\text{混合}} > \\eta_{\\text{定压}}$。"
+      },
+      {
+        "name": "燃气轮机布雷顿循环、效率与回热度",
+        "formula": "$$\\eta_{\\text{t}} = 1 - \\frac{1}{\\pi^{\\frac{\\kappa - 1}{\\kappa}}}, \\quad \\eta_{\\text{C},s} = \\frac{h_{2s} - h_1}{h_{2'} - h_1}, \\quad \\eta_{\\text{T}} = \\frac{h_3 - h_{4'}}{h_3 - h_{4s}}, \\quad \\sigma = \\frac{T_5 - T_{2'}}{T_{4'} - T_{2'}}$$",
+        "note": "回热有效前提是气轮机排气温度高于压气机出口温度（$T_{4'} > T_{2'}$，理想循环临界压比 $\\pi_{\\text{lim}} = (T_3/T_1)^{\\frac{\\kappa}{2(\\kappa-1)}}$）。无回热时单独采用分级压缩中间冷却反而降低热效率，须配合回热才提效。"
+      }
+    ]
+  },
+  {
+    "id": "ch10",
+    "title": "第10章：蒸汽动力装置循环",
+    "tag": "第10章核心",
+    "items": [
+      {
+        "name": "朗肯循环功、热量、效率与耗汽率",
+        "formula": "$$w_{\\text{T}} = h_1 - h_2, \\quad w_{\\text{p}} \\approx v'(p_1 - p_2), \\quad q_1 = h_1 - h_4, \\quad \\eta_{\\text{t}} = \\frac{w_{\\text{T}} - w_{\\text{p}}}{q_1}, \\quad d = \\frac{3600}{w_{\\text{net}}} \\; [\\text{kg/(kW}\\cdot\\text{h)}]$$",
+        "note": "水比体积 $v' \\approx 0.001\\text{ m}^3\\text{/kg}$ 极小，工程上常忽略水泵功 $w_{\\text{p}}$。计入汽轮机相对内效率 $\\eta_{\\text{T}}$ 时，实际排汽焓 $h_{2'} = h_1 - \\eta_{\\text{T}}(h_1 - h_{2s})$。"
+      },
+      {
+        "name": "蒸汽再热循环",
+        "formula": "$$w_{\\text{T}} = (h_1 - h_2) + (h_3 - h_4), \\quad q_1 = (h_1 - h_6) + (h_3 - h_2)$$",
+        "note": "首要目的是右移膨胀线、提高汽轮机末级排汽干度（保证 $x_2 \\ge 0.88$ 防止液滴冲蚀叶片）；合理选择再热压力可同时提高热效率。"
+      },
+      {
+        "name": "抽汽回热循环（混合式给水加热器）",
+        "formula": "$$\\alpha(h_{01} - h_{01}') = (1 - \\alpha)(h_{01}' - h_3) \\implies \\alpha = \\frac{h_{01}' - h_3}{h_{01} - h_3}$$",
+        "note": "对每 1 kg 新蒸汽：抽汽份额为 $\\alpha$，流经低压段与冷凝器的份额为 $(1-\\alpha)$，锅炉吸热 $q_1 = h_1 - h_{01}'$，冷凝放热 $q_2 = (1-\\alpha)(h_2 - h_3)$。本质是提高平均吸热温度 $T_{\\text{mH}}$。"
+      },
+      {
+        "name": "热电合供热量利用系数",
+        "formula": "$$\\xi = \\frac{w_{\\text{net}} + q_{\\text{h}}}{q_1}$$",
+        "note": "仅按第一定律等价相加电功与低品位热能，忽视了能量品质（㶲）差异，完善评价须结合㶲效率。"
+      }
+    ]
+  },
+  {
+    "id": "ch11",
+    "title": "第11章：制冷循环与热泵",
+    "tag": "第11章核心",
+    "items": [
+      {
+        "name": "逆向卡诺循环与热泵供热系数",
+        "formula": "$$\\varepsilon_{\\text{c}} = \\frac{q_{\\text{c}}}{w_{\\text{net}}} = \\frac{T_2}{T_0 - T_2}, \\quad \\varepsilon' = \\frac{q_1}{w_{\\text{net}}} = \\varepsilon + 1 = \\frac{T_1}{T_1 - T_2}$$",
+        "note": "逆向循环与正向动力循环相反：冷库温度 $T_2$ 越低或环境温度 $T_0$ 越高，温差越大，制冷系数 $\\varepsilon$ 越小、越费电！"
+      },
+      {
+        "name": "压缩空气制冷循环（布雷顿逆循环）",
+        "formula": "$$\\varepsilon = \\frac{T_1 - T_4}{(T_2 - T_1) - (T_3 - T_4)} = \\frac{1}{\\pi^{\\frac{\\kappa - 1}{\\kappa}} - 1}, \\quad q_{\\text{c}} = c_p\\left(T_1 - \\frac{T_3}{\\pi^{\\frac{\\kappa-1}{\\kappa}}}\\right)$$",
+        "note": "空气 $\\mu_J \\approx 0$ 绝不能用节流阀代替膨胀机！压比 $\\pi$ 增大时 $q_{\\text{c}}$ 增大但 $\\varepsilon$ 下降；采用回热不改变理论 $\\varepsilon$，但能降低所需压比从而提高实际 $\\varepsilon$。"
+      },
+      {
+        "name": "压缩蒸气制冷循环与过冷技术",
+        "formula": "$$q_{\\text{c}} = h_1 - h_5 = h_1 - h_4, \\quad w_{\\text{C}} = h_2 - h_1 = \\frac{h_{2s} - h_1}{\\eta_{\\text{C},s}}, \\quad \\varepsilon = \\frac{q_{\\text{c}}}{w_{\\text{C}}}$$",
+        "note": "冷凝液过冷（$h_{4'} < h_4$）使节流后干度减小、单位制冷量 $q_{\\text{c}}$ 增大，而压缩功 $w_{\\text{C}}$ 不变，故制冷系数 $\\varepsilon$ 显著提高。节流㶲损：$i = T_0(s_5 - s_4)$。"
+      },
+      {
+        "name": "吸收式制冷理论最大热量利用系数",
+        "formula": "$$\\text{COP}_{\\max} = \\eta_{\\text{c}} \\cdot \\varepsilon_{\\text{c}} = \\frac{T_{\\text{H}} - T_0}{T_{\\text{H}}} \\cdot \\frac{T_{\\text{L}}}{T_0 - T_{\\text{L}}}$$",
+        "note": "等效于工作在 $(T_{\\text{H}}, T_0)$ 的卡诺热机驱动工作在 $(T_0, T_{\\text{L}})$ 的逆向卡诺制冷机。"
+      }
+    ]
+  },
+  {
+    "id": "ch12",
+    "title": "第12章：实际气体与热力学一般关系式",
+    "tag": "第12章核心",
+    "items": [
+      {
+        "name": "压缩因子、对比参数与对应态原理",
+        "formula": "$$z = \\frac{pv}{R_g T} = \\frac{v}{v_{\\text{id}}}, \\quad p_{\\text{r}} = \\frac{p}{p_{\\text{cr}}}, \\quad T_{\\text{r}} = \\frac{T}{T_{\\text{cr}}}, \\quad V_{\\text{r}}' = \\frac{V_{\\text{m}}}{RT_{\\text{cr}}/p_{\\text{cr}}}$$",
+        "note": "$z < 1$ 引力占主导（比理想气体更易压缩），$z > 1$ 分子固有体积斥力占主导；实际气体临界压缩因子 $z_{\\text{cr}} \\approx 0.23 \\sim 0.31$（范氏方程固定为 $3/8 = 0.375$）。"
+      },
+      {
+        "name": "范德瓦耳斯方程与 R-K 方程",
+        "formula": "$$\\left(p + \\frac{a}{v^2}\\right)(v - b) = R_g T, \\quad p = \\frac{RT}{V_{\\text{m}} - b} - \\frac{a}{T^{0.5}V_{\\text{m}}(V_{\\text{m}} + b)}$$",
+        "note": "临界拐点条件：$\\left(\\frac{\\partial p}{\\partial v}\\right)_{T_{\\text{cr}}} = 0$，$\\left(\\frac{\\partial^2 p}{\\partial v^2}\\right)_{T_{\\text{cr}}} = 0$。范氏常数：$a = \\frac{27R_g^2 T_{\\text{cr}}^2}{64p_{\\text{cr}}}, b = \\frac{R_g T_{\\text{cr}}}{8p_{\\text{cr}}}$；R-K 常数：$a = \\frac{0.42748 R^2 T_{\\text{cr}}^{2.5}}{p_{\\text{cr}}}, b = \\frac{0.08664 RT_{\\text{cr}}}{p_{\\text{cr}}}$。"
+      },
+      {
+        "name": "四个特征函数与四个麦克斯韦关系式",
+        "formula": "$$\\begin{aligned} \\mathrm{d}u &= T\\,\\mathrm{d}s - p\\,\\mathrm{d}v \\implies \\left(\\frac{\\partial T}{\\partial v}\\right)_s = -\\left(\\frac{\\partial p}{\\partial s}\\right)_v \\\\ \\mathrm{d}h &= T\\,\\mathrm{d}s + v\\,\\mathrm{d}p \\implies \\left(\\frac{\\partial T}{\\partial p}\\right)_s = \\left(\\frac{\\partial v}{\\partial s}\\right)_p \\\\ \\mathrm{d}f &= -s\\,\\mathrm{d}T - p\\,\\mathrm{d}v \\implies \\left(\\frac{\\partial s}{\\partial v}\\right)_T = \\left(\\frac{\\partial p}{\\partial T}\\right)_v \\\\ \\mathrm{d}g &= -s\\,\\mathrm{d}T + v\\,\\mathrm{d}p \\implies \\left(\\frac{\\partial s}{\\partial p}\\right)_T = -\\left(\\frac{\\partial v}{\\partial T}\\right)_p \\end{aligned}$$",
+        "note": "特征函数必须是 $u(s,v), h(s,p), f(T,v), g(T,p)$（注意 $u(s,p)$ 与 $h(s,v)$ 不是特征函数！）。自由能 $f = u - Ts$（可逆定温膨胀功 $-\\Delta F = W$），自由焓 $g = h - Ts$（可逆定温技术功 $-\\Delta G = W_{\\text{t}}$）。"
+      },
+      {
+        "name": "熵、内能、焓一般关系式与比热容差",
+        "formula": "$$\\begin{aligned} \\mathrm{d}s &= \\frac{c_v}{T}\\,\\mathrm{d}T + \\left(\\frac{\\partial p}{\\partial T}\\right)_v \\mathrm{d}v = \\frac{c_p}{T}\\,\\mathrm{d}T - \\left(\\frac{\\partial v}{\\partial T}\\right)_p \\mathrm{d}p \\\\ \\mathrm{d}u &= c_v\\,\\mathrm{d}T + \\left[T\\left(\\frac{\\partial p}{\\partial T}\\right)_v - p\\right]\\mathrm{d}v, \\quad \\mathrm{d}h = c_p\\,\\mathrm{d}T + \\left[v - T\\left(\\frac{\\partial v}{\\partial T}\\right)_p\\right]\\mathrm{d}p \\\\ c_p - c_v &= -T\\left(\\frac{\\partial v}{\\partial T}\\right)_p^2 \\left(\\frac{\\partial p}{\\partial v}\\right)_T = T\\left(\\frac{\\partial v}{\\partial T}\\right)_p \\left(\\frac{\\partial p}{\\partial T}\\right)_v = \\frac{Tv\\alpha_V^2}{\\kappa_T} \\ge 0 \\end{aligned}$$",
+        "note": "水在 $4\\,{}^\\circ\\text{C}$ 密度最大（$\\alpha_V = 0$），故 $4\\,{}^\\circ\\text{C}$ 时 $c_p = c_v$，其余温度 $c_p > c_v$。"
+      },
+      {
+        "name": "三个热系数、焦耳-汤姆逊系数与克拉佩龙方程",
+        "formula": "$$\\alpha_V = \\frac{1}{v}\\left(\\frac{\\partial v}{\\partial T}\\right)_p, \\; \\kappa_T = -\\frac{1}{v}\\left(\\frac{\\partial v}{\\partial p}\\right)_T, \\; \\alpha = \\frac{1}{p}\\left(\\frac{\\partial p}{\\partial T}\\right)_v \\; (\\alpha_V = p\\alpha\\kappa_T)$$",
+        "note": "焦-汤系数：$\\mu_J = \\left(\\frac{\\partial T}{\\partial p}\\right)_h = \\frac{1}{c_p}\\left[T\\left(\\frac{\\partial v}{\\partial T}\\right)_p - v\\right]$（$\\mu_J > 0$ 致冷区节流降温，$\\mu_J < 0$ 致温区节流升温，常温高压 $\\text{H}_2/\\text{He}$ 节流升温）。克拉佩龙方程：$\\frac{\\mathrm{d}p}{\\mathrm{d}T} = \\frac{\\gamma}{T(v'' - v')}$。"
+      }
+    ]
+  }
+]
