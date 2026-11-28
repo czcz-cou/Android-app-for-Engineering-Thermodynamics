@@ -12,7 +12,7 @@ PROJECT_ROOT = Path(r"c:\Users\czcz2\Desktop\anti test\ThermoQuizApp")
 ASSETS_SRC = PROJECT_ROOT / "assets_src"
 ANDROID_DIR = PROJECT_ROOT / "android"
 BUILD_DIR = PROJECT_ROOT / "build"
-FINAL_APK = Path(r"c:\Users\czcz2\Desktop\anti test\工热刷题宝_v4.0.apk")
+FINAL_APK = Path(r"c:\Users\czcz2\Desktop\anti test\工热刷题宝_v4.1.apk")
 
 def find_single(base: Path, pattern: str) -> Path:
     hits = list(base.rglob(pattern))

@@ -1,4 +1,4 @@
-/* 工热刷题宝 v4.0 — 516 题全解析（第 3–7 & 10–12 章 + 考题池 + 模拟卷） */
+/* 工热刷题宝 v4.1 — 547 题全解析（第 3–12 章 + 考题池 + 模拟卷） */
 (function () {
   "use strict";
 
@@ -39,6 +39,10 @@
     ch6_ext: "6.2 拓展题",
     ch7_think: "7.1 思考题",
     ch7_ext: "7.2 拓展题",
+    ch8_think: "8.1 思考题",
+    ch8_ext: "8.2 拓展题",
+    ch9_think: "9.1 思考题",
+    ch9_ext: "9.2 拓展题",
     ch10_think: "10.1 思考题",
     ch10_ext: "10.2 拓展题",
     ch11_think: "11.1 思考题",
@@ -114,6 +118,24 @@
       items: [
         { id: "ch7_think", code: "7.1", eyebrow: "第 7 章 · 7.1", title: "思考题解析", sub: "渐缩/缩放喷管、临界截面、摩擦修正、节流与冷却塔加湿" },
         { id: "ch7_ext", code: "7.2", eyebrow: "第 7 章 · 7.2", title: "拓展题解析", sub: "滞止参数、马赫数、蒸汽喷管选型、干度计与冷却塔平衡" }
+      ]
+    },
+    {
+      group: "第 8 章",
+      sub: "压气机的热力过程",
+      layout: "grid",
+      items: [
+        { id: "ch8_think", code: "8.1", eyebrow: "第 8 章 · 8.1", title: "思考题解析", sub: "定温/多变/绝热压缩耗功、余隙容积、多级压缩与不可逆㶲损" },
+        { id: "ch8_ext", code: "8.2", eyebrow: "第 8 章 · 8.2", title: "拓展题解析", sub: "最佳中间压力、两级中间冷却省功、绝热效率与活塞排量" }
+      ]
+    },
+    {
+      group: "第 9 章",
+      sub: "气体动力循环",
+      layout: "grid",
+      items: [
+        { id: "ch9_think", code: "9.1", eyebrow: "第 9 章 · 9.1", title: "思考题解析", sub: "奥托/狄塞尔/布雷顿/斯特林循环对比、回热、定温压胀与加力燃烧" },
+        { id: "ch9_ext", code: "9.2", eyebrow: "第 9 章 · 9.2", title: "拓展题解析", sub: "燃气轮机回热极限压比、变比热汽油/柴油机与喷气发动机计算" }
       ]
     },
     {
@@ -1676,7 +1698,7 @@
         if (!hasTxt && !hasImg) return false;
       }
       if (currentNbFilter !== "all") {
-        if (["ch3", "ch4", "ch5", "ch6", "ch7", "ch10", "ch11", "ch12"].includes(currentNbFilter)) {
+        if (["ch3", "ch4", "ch5", "ch6", "ch7", "ch8", "ch9", "ch10", "ch11", "ch12"].includes(currentNbFilter)) {
           return q.chapter === currentNbFilter;
         }
         return q.type === currentNbFilter;
@@ -1693,6 +1715,8 @@
       { k: "ch5", lbl: "第5章" },
       { k: "ch6", lbl: "第6章" },
       { k: "ch7", lbl: "第7章" },
+      { k: "ch8", lbl: "第8章" },
+      { k: "ch9", lbl: "第9章" },
       { k: "ch10", lbl: "第10章" },
       { k: "ch11", lbl: "第11章" },
       { k: "ch12", lbl: "第12章" },
@@ -2064,7 +2088,7 @@
         <div class="preview-box md-content">${previewFormula}</div>
       </div>
 
-      <div class="settings-section-label"><span>数据与备份</span><span class="num-tab">v4.0.0 · ${QUESTIONS.length} 题</span></div>
+      <div class="settings-section-label"><span>数据与备份</span><span class="num-tab">v4.1.0 · ${QUESTIONS.length} 题</span></div>
       <div class="settings-group">
         <div class="num-tab" style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">
           已刷 ${st.practiced} 题 · 收藏 ${st.favCount} 题 · 笔记 ${st.noteCount} 题 · ${imgStatsText}
