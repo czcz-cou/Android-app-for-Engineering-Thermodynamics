@@ -50,5 +50,3 @@ python -m http.server 8765 --bind 127.0.0.1 --directory assets_src
 ```bash
 python build_apk.py
 ```
-
-> **安全提示**：`release.keystore` 请仅在本地妥善备份，切勿提交到远程仓库；覆盖安装旧版本 App 时必须使用同一签名密钥，否则系统会提示签名冲突。
