@@ -1,4 +1,4 @@
-/* 工热刷题宝 v3.6 — iOS App Store Liquid Glass, 120fps GPU Morph & Ch12 Proof Special */
+/* 工热刷题宝 v4.0 — 516 题全解析（第 3–7 & 10–12 章 + 考题池 + 模拟卷） */
 (function () {
   "use strict";
 
@@ -11,6 +11,7 @@
   });
 
   const CH12_PROOF_IDS = [
+    "ch3_think_03",
     "ch12_think_09",
     "ch12_think_12",
     "ch12_ext_02",
@@ -28,6 +29,16 @@
   ];
 
   const SECTION_SHORT_LABELS = {
+    ch3_think: "3.1 思考题",
+    ch3_ext: "3.2 拓展题",
+    ch4_think: "4.1 思考题",
+    ch4_ext: "4.2 拓展题",
+    ch5_think: "5.1 思考题",
+    ch5_ext: "5.2 拓展题",
+    ch6_think: "6.1 思考题",
+    ch6_ext: "6.2 拓展题",
+    ch7_think: "7.1 思考题",
+    ch7_ext: "7.2 拓展题",
     ch10_think: "10.1 思考题",
     ch10_ext: "10.2 拓展题",
     ch11_think: "11.1 思考题",
@@ -54,10 +65,55 @@
           icon: "sigma",
           isSpecial: true,
           eyebrow: "重点专题 · 第 12 章热力学证明",
-          title: "第 12 章热力学证明题（14 题）",
-          sub: "跨全库归集第 12 章、考题池与模拟卷中的麦克斯韦关系、自由焓、范氏气体与热力学一般关系式证明推导题",
+          title: "第 12 章热力学证明题（15 题）",
+          sub: "跨全库归集第 3 章、第 12 章、考题池与模拟卷中的麦克斯韦关系、自由焓、范氏气体与热力学一般关系式证明推导题",
           questionIds: CH12_PROOF_IDS
         }
+      ]
+    },
+    {
+      group: "第 3 章",
+      sub: "气体和蒸汽的性质",
+      layout: "grid",
+      items: [
+        { id: "ch3_think", code: "3.1", eyebrow: "第 3 章 · 3.1", title: "思考题解析", sub: "理想气体判定、迈耶公式、熵变、三相点与汽化潜热" },
+        { id: "ch3_ext", code: "3.2", eyebrow: "第 3 章 · 3.2", title: "拓展题解析", sub: "喷管扩压管、换热混合、水蒸气与 R134a 查表计算" }
+      ]
+    },
+    {
+      group: "第 4 章",
+      sub: "理想气体混合物及湿空气",
+      layout: "grid",
+      items: [
+        { id: "ch4_think", code: "4.1", eyebrow: "第 4 章 · 4.1", title: "思考题解析", sub: "分压分体积定律、混合熵增、相对湿度、露点与含湿量" },
+        { id: "ch4_ext", code: "4.2", eyebrow: "第 4 章 · 4.2", title: "拓展题解析", sub: "汇合熵增、焓湿图查图、折合气体常数证明与压缩结露" }
+      ]
+    },
+    {
+      group: "第 5 章",
+      sub: "气体和蒸汽的基本热力过程",
+      layout: "grid",
+      items: [
+        { id: "ch5_think", code: "5.1", eyebrow: "第 5 章 · 5.1", title: "思考题解析", sub: "定温/定容/定压/定熵/多变过程、状态图面积与正负判别" },
+        { id: "ch5_ext", code: "5.2", eyebrow: "第 5 章 · 5.2", title: "拓展题解析", sub: "多变指数、刚性容器充放气、汽缸活塞销钉与相变传热" }
+      ]
+    },
+    {
+      group: "第 6 章",
+      sub: "热力学第二定律",
+      layout: "grid",
+      items: [
+        { id: "ch6_think", code: "6.1", eyebrow: "第 6 章 · 6.1", title: "思考题解析", sub: "开尔文与克劳修斯等效、卡诺定理、熵方程、熵产与㶲损" },
+        { id: "ch6_ext", code: "6.2", eyebrow: "第 6 章 · 6.2", title: "拓展题解析", sub: "热泵制冷、卡诺循环变比热、气轮机/换热器㶲损与过冷凝固" }
+      ]
+    },
+    {
+      group: "第 7 章",
+      sub: "气体与蒸汽的流动",
+      layout: "grid",
+      items: [
+        { id: "ch7_think", code: "7.1", eyebrow: "第 7 章 · 7.1", title: "思考题解析", sub: "渐缩/缩放喷管、临界截面、摩擦修正、节流与冷却塔加湿" },
+        { id: "ch7_ext", code: "7.2", eyebrow: "第 7 章 · 7.2", title: "拓展题解析", sub: "滞止参数、马赫数、蒸汽喷管选型、干度计与冷却塔平衡" }
       ]
     },
     {
@@ -456,7 +512,8 @@
       }
 
       if (/^\d+\.\s+/.test(trimmed)) {
-        let ol = "<ol>";
+        const startNum = parseInt(trimmed.match(/^(\d+)\.\s+/)[1], 10);
+        let ol = startNum > 1 ? `<ol start="${startNum}">` : "<ol>";
         while (i < lines.length && /^\d+\.\s+/.test(lines[i].trim())) {
           ol += `<li>${formatInlineMarkdown(lines[i].trim().replace(/^\d+\.\s+/, ""))}</li>`;
           i++;
@@ -652,9 +709,9 @@
     const orderIco = state.defaultOrder === "random" ? ic("shuffle", "ic-xs") : ic("list-ordered", "ic-xs");
 
     let footerKicker = "开始学习";
-    let footerTitle = "第 10 章 · 思考题解析";
+    let footerTitle = "第 3 章 · 思考题解析";
     let footerAction = "开始";
-    let heroOnClick = "openSection('ch10_think', this)";
+    let heroOnClick = "openSection('ch3_think', this)";
     if (state.lastSession && state.lastSession.queueIds && state.lastSession.queueIds.length > 0) {
       const ls = state.lastSession;
       const curNum = Math.min((ls.index || 0) + 1, ls.queueIds.length);
@@ -1126,7 +1183,6 @@
           <span class="pill pill-type">${TYPE_LABELS[q.type] || "题目"}</span>
           ${sourcePill}
           ${orderPill}
-          <span class="pill pill-page num-tab">原书 P.${q.page}</span>
           ${statusBadge}
         </div>
         <span class="num-tab" style="font-size:12px; color:var(--text-muted); font-weight:600;">${idx + 1} / ${session.queue.length}</span>
@@ -1550,7 +1606,7 @@
   window.shareQuestion = function (qid) {
     const q = Q_MAP[qid];
     if (!q) return;
-    const shareTxt = `【工热刷题宝 · ${q.num} (P.${q.page})】\n${q.stem}\n\n【参考答案】${q.answer}\n【解析】\n${q.analysis}`;
+    const shareTxt = `【工热刷题宝 · ${q.num}】\n${q.stem}\n\n【参考答案】${q.answer}\n【解析】\n${q.analysis}`;
     if (window.AppBridge && typeof window.AppBridge.shareText === "function") {
       window.AppBridge.shareText(q.num, shareTxt);
     } else if (navigator.clipboard) {
@@ -1620,7 +1676,7 @@
         if (!hasTxt && !hasImg) return false;
       }
       if (currentNbFilter !== "all") {
-        if (["ch10", "ch11", "ch12"].includes(currentNbFilter)) {
+        if (["ch3", "ch4", "ch5", "ch6", "ch7", "ch10", "ch11", "ch12"].includes(currentNbFilter)) {
           return q.chapter === currentNbFilter;
         }
         return q.type === currentNbFilter;
@@ -1632,6 +1688,11 @@
   function renderNotebook() {
     const chips = [
       { k: "all", lbl: "全部" },
+      { k: "ch3", lbl: "第3章" },
+      { k: "ch4", lbl: "第4章" },
+      { k: "ch5", lbl: "第5章" },
+      { k: "ch6", lbl: "第6章" },
+      { k: "ch7", lbl: "第7章" },
       { k: "ch10", lbl: "第10章" },
       { k: "ch11", lbl: "第11章" },
       { k: "ch12", lbl: "第12章" },
@@ -1688,7 +1749,7 @@
         return `
           <div class="list-row" data-card-id="nb_${q.id}" onclick="openNotebookItem(${idx}, this)">
             <div class="row-body">
-              <div class="row-title">${escapeHtml(q.num)} <span style="font-size:11.5px; font-weight:500; color:var(--text-muted);">· ${TYPE_LABELS[q.type]} · P.${q.page}</span></div>
+              <div class="row-title">${escapeHtml(q.num)} <span style="font-size:11.5px; font-weight:500; color:var(--text-muted);">· ${TYPE_LABELS[q.type]}${SECTION_SHORT_LABELS[q.section] ? " · " + escapeHtml(SECTION_SHORT_LABELS[q.section]) : ""}</span></div>
               <div class="row-sub">${escapeHtml(plainStem)}${q.stem.length > 82 ? "..." : ""}</div>
               ${notePreview}
             </div>
@@ -1753,13 +1814,17 @@
 
   /* ---------- Tab 4: Global Search & Overview ---------- */
   function renderSearchChips() {
+    const counts = { all: QUESTIONS.length, choice: 0, blank: 0, qa: 0, calc: 0, draw: 0 };
+    QUESTIONS.forEach((q) => {
+      if (counts[q.type] !== undefined) counts[q.type]++;
+    });
     const chips = [
-      { k: "all", lbl: "全部题型 (367)" },
-      { k: "choice", lbl: "选择题 (62)" },
-      { k: "blank", lbl: "填空题 (19)" },
-      { k: "qa", lbl: "思考与问答 (152)" },
-      { k: "calc", lbl: "计算与拓展 (125)" },
-      { k: "draw", lbl: "作图题 (9)" }
+      { k: "all", lbl: `全部题型 (${counts.all})` },
+      { k: "choice", lbl: `选择题 (${counts.choice})` },
+      { k: "blank", lbl: `填空题 (${counts.blank})` },
+      { k: "qa", lbl: `思考与问答 (${counts.qa})` },
+      { k: "calc", lbl: `计算与拓展 (${counts.calc})` },
+      { k: "draw", lbl: `作图题 (${counts.draw})` }
     ];
     document.getElementById("search-type-chips").innerHTML = chips
       .map(
@@ -1781,7 +1846,7 @@
     const overviewBox = document.getElementById("search-overview-container");
 
     if (!kw) {
-      container.innerHTML = `<div style="font-size:12.5px; color:var(--text-muted); text-align:center; padding:8px 0;">输入术语、公式符号或题号（如：卡诺、朗肯、露点、麦克斯韦、壅塞、258）检索全库 367 题</div>`;
+      container.innerHTML = `<div style="font-size:12.5px; color:var(--text-muted); text-align:center; padding:8px 0;">输入术语、公式符号或题号（如：卡诺、朗肯、露点、麦克斯韦、壅塞、258）检索全库 ${QUESTIONS.length} 题</div>`;
       overviewBox.style.display = "block";
       return;
     }
@@ -1817,7 +1882,7 @@
           return `
             <div class="list-row" data-card-id="sr_${q.id}" onclick="openSearchResult(${idx}, this)">
               <div class="row-body">
-                <div class="row-title">${escapeHtml(q.num)} <span style="font-size:11.5px;font-weight:500;color:var(--text-muted);">· ${TYPE_LABELS[q.type]} · P.${q.page}</span></div>
+                <div class="row-title">${escapeHtml(q.num)} <span style="font-size:11.5px;font-weight:500;color:var(--text-muted);">· ${TYPE_LABELS[q.type]}${SECTION_SHORT_LABELS[q.section] ? " · " + escapeHtml(SECTION_SHORT_LABELS[q.section]) : ""}</span></div>
                 <div class="row-sub">${escapeHtml(snippet)}...</div>
               </div>
               <div class="row-right"><span class="row-count num-tab">#${q.seq}</span>${ic("chevron-right", "ic-sm")}</div>
@@ -1861,7 +1926,7 @@
     document.getElementById("search-overview-container").innerHTML = `
       <div class="group-heading" style="margin-top:6px;">
         <span>各题型进度</span>
-        <span class="group-heading-sub">共 367 题</span>
+        <span class="group-heading-sub">共 ${QUESTIONS.length} 题</span>
       </div>
       <div class="grouped-card">${typesBreakdown}</div>
     `;
@@ -1999,7 +2064,7 @@
         <div class="preview-box md-content">${previewFormula}</div>
       </div>
 
-      <div class="settings-section-label"><span>数据与备份</span><span class="num-tab">v3.6.0 · 367 题</span></div>
+      <div class="settings-section-label"><span>数据与备份</span><span class="num-tab">v4.0.0 · ${QUESTIONS.length} 题</span></div>
       <div class="settings-group">
         <div class="num-tab" style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">
           已刷 ${st.practiced} 题 · 收藏 ${st.favCount} 题 · 笔记 ${st.noteCount} 题 · ${imgStatsText}
